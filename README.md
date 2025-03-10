@@ -1,4 +1,4 @@
-# Kakao REST API PHP Example
+# Kakao REST API PHP 예제
 
 이 프로젝트는 카카오 REST API를 PHP로 구현한 예제입니다. Node.js 버전을 PHP로 포팅한 것으로, 카카오 로그인 및 다양한 API 기능을 테스트해볼 수 있습니다.
 
@@ -34,7 +34,7 @@
 ## 환경 설정
 
 1. [Kakao Developers](https://developers.kakao.com)에서 애플리케이션을 생성합니다.
-2. 생성된 애플리케이션의 REST API 키를 `index.php` 파일의 `$client_id` 변수에 설정합니다.
+2. 생성된 애플리케이션의 REST API 키를 `api.php` 파일의 `$client_id` 변수에 설정합니다.
 3. 플랫폼 설정에서 다음 Redirect URI를 추가합니다:
    ```
    http://localhost:8000/index.php?action=redirect
