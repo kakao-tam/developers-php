@@ -46,6 +46,5 @@
 - 실제 서비스에서는 보안을 강화하고 프론트엔드와 백엔드를 분리하여 구현하는 것을 권장합니다.
 - API 키와 같은 중요한 정보는 환경 변수로 관리하는 것이 좋습니다.
 
-## 라이선스
-
-MIT License 
+## 스크린샷
+<img width="834" alt="image" src="https://github.com/user-attachments/assets/430dd6a1-234b-499c-8513-a0a8b144a8fc" />
