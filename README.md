@@ -37,7 +37,7 @@
 2. 생성된 애플리케이션의 REST API 키를 `api.php` 파일의 `$client_id` 변수에 설정합니다.
 3. 플랫폼 설정에서 다음 Redirect URI를 추가합니다:
    ```
-   http://localhost:8000/index.php?action=redirect
+   http://localhost:8000/api.php?action=redirect
    ```
 
 ## 주의사항
