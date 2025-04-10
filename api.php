@@ -7,7 +7,7 @@ session_start();
 
 $client_id = '4408b5bb51bdf4c89879e933556a21e8';
 $client_secret = ' this is client secret key ';
-$domain = 'http://localhost:8000';
+$domain = 'http://localhost:4000';
 $redirect_uri = $domain . '/api.php?action=redirect';
 $kauth_host = 'https://kauth.kakao.com';
 $kapi_host = 'https://kapi.kakao.com';
