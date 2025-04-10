@@ -55,4 +55,5 @@
 - API 키와 같은 중요한 정보는 환경 변수로 관리하는 것이 좋습니다.
 
 ## 스크린샷
-<img width="834" alt="image" src="https://github.com/user-attachments/assets/430dd6a1-234b-499c-8513-a0a8b144a8fc" />
+![image](https://github.com/user-attachments/assets/dd04a3a1-92eb-4780-b6db-721dba42e8fe)
+
