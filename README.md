@@ -23,12 +23,12 @@
 
 3. 내장 PHP 서버를 실행합니다:
    ```bash
-   php -S localhost:8000
+   php -S localhost:4000
    ```
 
 4. 웹 브라우저에서 다음 주소로 접속합니다:
    ```
-   http://localhost:8000
+   http://localhost:4000
    ```
 
 ## 환경 설정
@@ -37,7 +37,7 @@
 2. 생성된 애플리케이션의 REST API 키를 `api.php` 파일의 `$client_id` 변수에 설정합니다.
 3. 플랫폼 설정에서 다음 Redirect URI를 추가합니다:
    ```
-   http://localhost:8000/api.php?action=redirect
+   http://localhost:4000/api.php?action=redirect
    ```
 
 ## 주의사항
