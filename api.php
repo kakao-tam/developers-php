@@ -5,7 +5,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 session_start();
 
-$client_id = '4408b5bb51bdf4c89879e933556a21e8';
+$client_id = ' this is rest api key ';
 $client_secret = ' this is client secret key ';
 $domain = 'http://localhost:4000';
 $redirect_uri = $domain . '/api.php?action=redirect';
