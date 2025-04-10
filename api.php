@@ -5,12 +5,20 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 session_start();
 
-$client_id = ' this is rest api key ';
+$client_id = '4408b5bb51bdf4c89879e933556a21e8';
 $client_secret = ' this is client secret key ';
 $domain = 'http://localhost:8000';
 $redirect_uri = $domain . '/api.php?action=redirect';
-$token_uri = 'https://kauth.kakao.com/oauth/token';
-$api_host = 'https://kapi.kakao.com';
+$kauth_host = 'https://kauth.kakao.com';
+$kapi_host = 'https://kapi.kakao.com';
+$template_object = [
+    'object_type' => 'text',
+    'text' => 'Hello, world!',
+    'link' => [
+        'web_url' => 'https://developers.kakao.com',
+        'mobile_web_url' => 'https://developers.kakao.com'
+    ]
+];
 
 function call($method, $uri, $params = [], $headers = []) {
     $ch = curl_init();
@@ -37,8 +45,8 @@ $action = $_GET['action'] ?? '';
 switch ($action) {
     case 'authorize':
         $scope = $_GET['scope'] ?? '';
-        $scopeParam = $scope ? "&scope=" . $scope : "";
-        header("Location: https://kauth.kakao.com/oauth/authorize?client_id={$client_id}&redirect_uri={$redirect_uri}&response_type=code{$scopeParam}");
+        $scopeParam = $scope ? "&scope=" . urlencode($scope) : "";
+        header("Location: {$kauth_host}/oauth/authorize?client_id={$client_id}&redirect_uri={$redirect_uri}&response_type=code{$scopeParam}");
         exit;
 
     case 'redirect':
@@ -51,8 +59,8 @@ switch ($action) {
         ];
         
         $headers = ['Content-Type: application/x-www-form-urlencoded'];
-        $response = call('POST', $token_uri, $params, $headers);
-        
+        $response = call('POST', $kauth_host."/oauth/token", $params, $headers);
+        echo json_encode($response);
         if (isset($response['access_token'])) {
             $_SESSION['key'] = $response['access_token'];
             header("Location: {$domain}/index.html?login=success");
@@ -60,7 +68,7 @@ switch ($action) {
         exit;
 
     case 'profile':
-        $uri = $api_host . "/v2/user/me";
+        $uri = $kapi_host . "/v2/user/me";
         $headers = [
             'Content-Type: application/x-www-form-urlencoded',
             'Authorization: Bearer ' . $_SESSION['key']
@@ -71,7 +79,7 @@ switch ($action) {
         exit;
 
     case 'friends':
-        $uri = $api_host . "/v1/api/talk/friends";
+        $uri = $kapi_host . "/v1/api/talk/friends";
         $headers = ['Authorization: Bearer ' . $_SESSION['key']];
         $response = call('GET', $uri, [], $headers);
         header('Content-Type: application/json');
@@ -79,16 +87,7 @@ switch ($action) {
         exit;
 
     case 'message':
-        $uri = $api_host . "/v2/api/talk/memo/default/send";
-        $template_object = [
-            'object_type' => 'text',
-            'text' => 'Hello, world!',
-            'link' => [
-                'web_url' => 'https://developers.kakao.com',
-                'mobile_web_url' => 'https://developers.kakao.com'
-            ]
-        ];
-        
+        $uri = $kapi_host . "/v2/api/talk/memo/default/send";
         $params = ['template_object' => json_encode($template_object)];
         $headers = [
             'Content-Type: application/x-www-form-urlencoded',
@@ -101,17 +100,8 @@ switch ($action) {
         exit;
 
     case 'friend-message':
-        $uri = $api_host . "/v1/api/talk/friends/message/default/send";
+        $uri = $kapi_host . "/v1/api/talk/friends/message/default/send";
         $uuid = $_GET['uuid'] ?? '';
-        
-        $template_object = [
-            'object_type' => 'text',
-            'text' => 'Hello, world!',
-            'link' => [
-                'web_url' => 'https://developers.kakao.com',
-                'mobile_web_url' => 'https://developers.kakao.com'
-            ]
-        ];
         
         $params = [
             'receiver_uuids' => "[$uuid]",
@@ -129,7 +119,7 @@ switch ($action) {
         exit;
 
     case 'logout':
-        $uri = $api_host . "/v1/user/logout";
+        $uri = $kapi_host . "/v1/user/logout";
         $headers = ['Authorization: Bearer ' . $_SESSION['key']];
         $response = call('POST', $uri, [], $headers);
         session_destroy();
@@ -138,7 +128,7 @@ switch ($action) {
         exit;
 
     case 'unlink':
-        $uri = $api_host . "/v1/user/unlink";
+        $uri = $kapi_host . "/v1/user/unlink";
         $headers = ['Authorization: Bearer ' . $_SESSION['key']];
         $response = call('POST', $uri, [], $headers);
         session_destroy();
