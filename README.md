@@ -16,7 +16,6 @@
 ```
 ├── api.php # Kakao API 호출을 처리하는 PHP 스크립트
 ├── index.html # 메인 HTML 파일
-├── styles.css # 스타일시트
 └── README.md # 프로젝트 설명 파일
 ```
 
